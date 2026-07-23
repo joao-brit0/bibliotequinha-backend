@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use App\Services\BookService;
 use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\DTOs\BookDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -56,5 +58,32 @@ class BookController extends Controller
             'message' => 'Livro catalogado com sucesso no acervo.',
             'data' => $book
         ], 201); // Código HTTP 201: Created
+    }
+
+    public function update(UpdateBookRequest $request, Book $book): JsonResponse
+    {
+        $validatedData = $request->validated();
+
+        $bookDTO = new BookDTO(
+            title: $validatedData['title'],
+            publisher_id: $validatedData['publisher_id'],
+            theme_id: $validatedData['theme_id'],
+            isbn: $validatedData['isbn'],
+            authors: $validatedData['authors'],
+            subtitle: $validatedData['subtitle'] ?? null,
+            publication_year: $validatedData['publication_year'] ?? null,
+            quantity: $validatedData['quantity'] ?? 1,
+            number_of_pages: $validatedData['number_of_pages'] ?? null,
+            cutter_code: $validatedData['cutter_code'] ?? null,
+            description: $validatedData['description'] ?? null,
+        );
+
+        $updatedBook = $this->bookService->updateBook($bookDTO, $book);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Livro atualizado com sucesso.',
+            'data' => $updatedBook
+        ]);
     }
 }
