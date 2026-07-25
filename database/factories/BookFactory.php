@@ -28,7 +28,7 @@ class BookFactory extends Factory
             'number_of_pages' => fake()->numberBetween(50, 900),
             'cutter_code' => fake()->bothify('?###?'),
             'description' => fake()->paragraph(),
-            // Associações de chave estrangeira preparadas
+            'cover_image' => fake()->imageUrl(480, 640, 'books', true, 'Capa'),
             'publisher_id' => Publisher::factory(),
             'theme_id' => Theme::factory(),
         ];

@@ -11,7 +11,7 @@ use App\Models\Theme;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['title', 'subtitle', 'publication_year', 'publisher_id', 'theme_id', 'isbn', 'quantity', 'number_of_pages', 'cutter_code', 'description', 'authors'])]
+#[Fillable(['title', 'subtitle', 'cover_image', 'publication_year', 'publisher_id', 'theme_id', 'isbn', 'quantity', 'number_of_pages', 'cutter_code', 'description', 'authors'])]
 
 class Book extends Model
 {

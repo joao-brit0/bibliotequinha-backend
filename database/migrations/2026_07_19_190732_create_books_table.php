@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('subtitle')->nullable();
+            $table->string('cover_image')->nullable();
 
             $table->integer('publication_year')->nullable(); 
             

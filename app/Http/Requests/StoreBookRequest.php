@@ -35,6 +35,7 @@ class StoreBookRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'authors' => ['required', 'array', 'min:1'], // Exige no mínimo 1 autor
             'authors.*' => ['exists:authors,id'], // Valida cada ID de autor enviado
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ];
     }
 }

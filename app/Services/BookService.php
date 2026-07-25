@@ -30,6 +30,7 @@ class BookService
                 'number_of_pages' => $dto->number_of_pages,
                 'cutter_code' => $dto->cutter_code,
                 'description' => $dto->description,
+                'cover_image' => $dto->cover_image
             ]);
 
             $book->authors()->attach($dto->authors);
@@ -52,11 +53,20 @@ class BookService
                 'number_of_pages' => $dto->number_of_pages,
                 'cutter_code' => $dto->cutter_code,
                 'description' => $dto->description,
+                'cover_image' => $dto->cover_image
             ]);
 
             $book->authors()->sync($dto->authors);
 
             return $book->load(['authors', 'publisher', 'theme']);
         });
+    }
+
+    public function getBookByTheme(int $themeId, int $perPage = 15): LengthAwarePaginator
+    {
+        return Book::with(['authors', 'publisher', 'theme'])
+            ->where('theme_id', $themeId)
+            ->orderBy('title', 'asc')
+            ->paginate($perPage);
     }
 }

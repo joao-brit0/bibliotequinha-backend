@@ -16,5 +16,6 @@ class BookDTO
         public readonly ?int $number_of_pages = null,
         public readonly ?string $cutter_code = null,
         public readonly ?string $description = null,
+        public readonly ?string $cover_image = null,
     ) {}
 }
