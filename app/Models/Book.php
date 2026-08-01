@@ -47,7 +47,6 @@ class Book extends Model
                     return null;
                 }
                 
-                // asset() gera a URL completa com http://localhost/...
                 return asset('storage/' . $this->cover_image);
             }
         );

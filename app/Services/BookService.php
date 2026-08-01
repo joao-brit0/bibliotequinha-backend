@@ -69,4 +69,12 @@ class BookService
             ->orderBy('title', 'asc')
             ->paginate($perPage);
     }
+
+    public function getBookByTitle(string $title, int $perPage = 15): LengthAwarePaginator
+    {
+        return Book::with(['authors', 'publisher', 'theme'])
+            ->where('title', 'ILIKE', "%{$title}%")
+            ->orderBy('title', 'asc')
+            ->paginate($perPage);
+    }
 }

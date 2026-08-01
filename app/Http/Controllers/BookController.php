@@ -32,6 +32,26 @@ class BookController extends Controller
         ]);
     }
 
+    public function getBookByTitle(Request $request): JsonResponse
+    {
+        $title = $request->query('title');
+        $perPage = $request->query('per_page', 15);
+
+        if (!$title) {
+            return response()->json([
+                'success' => false,
+                'message' => 'O parâmetro "title" é obrigatório.'
+            ], 400); // Código HTTP 400: Bad Request
+        }
+
+        $books = $this->bookService->getBookByTitle($title, $perPage);
+
+        return response()->json([
+            'success' => true,
+            'data' => $books
+        ]);
+    }
+
     public function store(StoreBookRequest $request): JsonResponse
     {
         // Aciona o Service passando todos os dados recebidos na requisição
