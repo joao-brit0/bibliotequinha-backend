@@ -25,24 +25,4 @@ class UserController extends Controller
             'data' => $user
         ], 201);
     }
-
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $token = Auth::user()->createToken('auth_token')->plainTextToken;
-
-            return response()->json([
-                'success' => true,
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-            ]);
-        }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Unauthorized'
-        ], 401); 
-    }
 }
