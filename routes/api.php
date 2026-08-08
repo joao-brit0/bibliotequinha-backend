@@ -13,7 +13,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/books/search', [BookController::class, 'getBookByTitle']); 
     Route::get('/authors', [AuthorController::class, 'index']);
 });
+Route::get('/user', [UserController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/publishers', [PublisherController::class, 'index']);
+Route::post('/publishers', [PublisherController::class, 'store']);
 Route::post('/books', [BookController::class, 'store']);
 Route::post('/create', [UserController::class, 'createUser']);
 Route::post('/login', [AuthController::class, 'login']);

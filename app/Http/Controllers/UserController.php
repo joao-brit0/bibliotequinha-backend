@@ -14,6 +14,20 @@ class UserController extends Controller
         protected UserService $userService
     ) {}
 
+    public function index()
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não autenticado'], 401);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $user
+        ]);
+    }
+
     public function createUser(StoreUserRequest $request)
     {
         $validatedData = $request->validated();
